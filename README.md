@@ -1,159 +1,94 @@
-# GoKu API Gateway CE（悟空API网关 开源版）
-
-![](http://data.eolinker.com/course/Y9EYfxU069c9bc2f7a7f1e211966173e296cd04f768ee82)
-
-## 简介
-
-**GoKu API Gateway CE，中文名：悟空API网关（开源版），是eoLinker旗下的API网关，帮助企业进行API服务治理、API性能安全维护，为企业数字化赋能。**
-
-GoKu API Gateway CE，支持OpenAPI与微服务管理，支持私有云部署，实现API转发、请求参数转换、数据校验等功能，提供图形化界面管理，能够快速管理多个API网关，提高API业务安全性。
-
-## 相关链接
-
-* 官方网站：https://www.eolinker.com/#/product/agw
-
-* 教程文档：https://help.eolinker.com/#/tutorial/?productID=14
-
-* Github：https://github.com/eolinker/GoKu-API-Gateway
-
-## 特性
-
-1. **免费且开源**：GoKu API Gateway秉承开源精神，是国内第一个企业开源的API接口网关，为广大的开发、运维以及管理人员提供专业的产品。
-
-2. **多种鉴权方式**：支持Basic 认证、API Key授权、IP认证、无认证等方式。
-
-3. **支持Open API**：不同账户拥有独立的访问密钥。
-
-4. **权限管理**：可针对不同策略组设置流量控制策略，包括访问QPS、访问总次数、访问IP、访问时间段等
-
-5. **请求转发**：默认支持http rest路由。
-
-6. **IP黑白名单**：支持全局IP白名单、也可自定义某个接口的IP白名单。
-
-7. **数据整形**：支持参数的转换与绑定，支持formdata、raw数据。
-
-8. **配置网关**：支持 **GoKu-UI** 与 **配置文件** 修改网关配置。
-
-9. **快速部署**：仅需要一个go环境即可安装运行。
-
-## 图片介绍
-
-![](http://data.eolinker.com/course/a9l9ZzQfe7cfc0f93578629db01a1a3197864dd51fa9dab)
-
-![](http://data.eolinker.com/course/3KDiWxscb527a460477f5bbb95fc3db6c09426c47de96f1)
-
-![](http://data.eolinker.com/course/pRMJNTb1974cd4d502bf17f5b477b236cf5c090496af571)
-
-## 更新日志
-
-#### V2.1.4（2018/9/7）
-新增：
-
-1. 策略ID参数支持放在Header。
-
-说明：
-
-通过网关访问的请求地址注意事项：
-* 若策略ID放头部，则完整请求路径为：**网关IP：端口号/网关别名/接口路径**，策略ID的Header字段名为：**Strategy-Id**。
-* 若策略ID放URI，则完整请求路径为：**网关IP：端口号/网关别名/策略ID/接口路径**。
-
-#### V2.1.3（2018/5/30）
-新增：
-
-1. 支持rest路由。
-
-#### V2.1.2（2018/5/24）
-修复：
-
-1. 修复网关后端服务返回请求头部重复。
-
-#### V2.1.1（2018/5/22）
-修复：
-
-1. 修复流量控制方案修改后写入配置文件错误的问题;
-2. 修复当接口、方案为最后一个时，删除失败的问题。
-
-#### V2.1.0（2018/5/21）
-新增：
-
-1. 支持UI管理界面；
-2. UI新增网关监控信息；
-3. UI支持对网关进行开启、重载、重启和关闭操作；
-4. 接口分组，即配置文件的api_group.conf新增字段"cancel_default_group"，非必填，默认为false。
-
-#### V2.0.3（2018/5/14）
-新增：
-
-1. 支持form-data格式下文件传输；
-2. 接口配置文件弃用proxy_body_type、proxy_body_desc字段，启用is_raw字段用于支持raw数据转发。
-
-优化：
-
-1. 基于HttpRouter优化路由转发性能。
-
-#### V2.0.2（2018/5/7）
-修复：
-
-1. 修复请求路径带query参数时，路径匹配失败的问题；
-2. 修复proxy_method配置必须大写的问题，现支持不区分大小写。
-
-#### V2.0.1（2018/5/4）
-优化：
-
-1. 优化网关的错误提示。
-
-
-修复：
-
-1. 修复访问网关根路径时，报越界错误。
-
-#### V2.0.0（2018/5/4）
-新增：
-
-1. 通过配置文件修改网关配置；
-2. 新增全局IP黑白名单；
-3. 参数新增支持json类型。
-
-优化：
-
-1. 架构优化，减少第三方依赖，提升网关性能；
-2. 弃置mysql、redis数据库的使用，改用配置文件方式读取文件配置。
-
-#### V1.0.3（2018/4/20）
-修复：
-
-1. 修复“鉴权方式”编辑页错位问题。
-
-#### V1.0.2（2018/4/19）
-新增:
-
-1. “接口分组”与“接口详情”可选择拼接网关地址与策略组id，方便查看请求地址。
-
-修复：
-
-1. “鉴权方式”里API Key显示错位问题;
-2. 修复mysql5.7环境下，sql脚本执行失败;
-3. 修复访问网关后端服务时，请求提示错误的问题。
-
-#### V1.0.1（2018/4/17）
-修复：
-
-1. 某个脚本的编码错误。
-
-#### V1.0.0(2018/4/17)
-新增：
-
-1. “网关概况”新增监控信息，方便监控API运行状况，包括：请求总数、成功请求数、失败请求数、每分钟实时访问次数等；
-2. “权限控制”新增策略组，每个策略组下包括鉴权方式、IP黑白名单、流量控制三大模块；
-3. 强化鉴权方式，包括Basic Auth、API Key、无认证；
-4. 强化流量控制，支持允许访问时间段与禁止访问时间段；
-5. 强化流量控制，支持设置每秒最大访问次数、每分钟最大访问次数、每小时最大访问次数、每天最大访问次数。
-
-优化：
-
-1. 全面优化界面；
-2. 优化访问性能。
-
-其他：
-
-1. 加入开源声明。
+![](https://data.eolinker.com/WJ2lfq217421a961efc420d88a7cb6f59586824a8ea2f84.jpg)
+
+[![Gitter](https://badges.gitter.im/goku-api-gateway/community.svg)](https://gitter.im/goku-api-gateway/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Go Report Card](https://goreportcard.com/badge/github.com/eolinker/goku-api-gateway)](https://goreportcard.com/report/github.com/eolinker/goku-api-gateway) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3214/badge)](https://bestpractices.coreinfrastructure.org/projects/3214) ![](https://img.shields.io/badge/license-GPL3.0-blue.svg)
+
+Goku API Gateway is a Golang-based microservice gateway that enables high-performance dynamic routing,service orchestration, multi-tenancy management, API access control, etc. It's also suitable for API management under micro-service system. 
+
+Goku provides graphic interface and plug-in system to make configuration easier and expand more convenient.
+
+# Summary / [中文介绍](https://github.com/eolinker/goku-api-gateway/blob/master/README_CN.md "中文介绍")
+
+- [WhyGoku](#WhyGoku "WhyGoku")
+- [Features](#Features "Features")
+- [Benchmark](#Benchmark "Benchmark")
+- [ConsolePreview](#ConsolePreview "ConsolePreview")
+- [QuickStart](#QuickStart "QuickStart")
+- [EnterpriseSupport](#EnterpriseSupport "EnterpriseSupport")
+- [AboutUs](#AboutUs "AboutUs")
+- [License](#License "License")
+
+# Why Goku
+ 
+Goku API Gateway is a microservice gateway that runs on the boundaries of enterprise system services. When you build websites, apps, IOT, and even API transactions, Goku API Gateway can help you extract duplicate components from your internal system and place them on the Goku gateway, such as user authorization, access control, traffic monitoring, firewalls, data cache, data conversion and so on.
+
+Goku API Gateway CE provides comprehensive usage guide and customization guide. Goku is written in pure Go language, with good performance and scalability, and the built-in plug-in system enables enterprises to customize development for their own business.
+
+Goku API Gateway also can combine with EOLINK API Studio to enhance API Management,API Monitor and Automated test.
+
+All in all, Goku API Gateway enables enterprise to focus on their business.
+
+[![Stargazers over time](https://starchart.cc/eolinker/goku-api-gateway.svg)](#)
+
+# Product Features
+- **Dashboard**: Built-in dashboard to configure Goku.
+- **Cluster Management**：Goku nodes are stateless and can be expanded horizontally. Also the configuration can be synchronized automatically.
+- **Hot Updates**: Continuously updates configurations without restart nodes.
+- **Orchestration**：Orchestration can correspond to multiple backends. The backend input parameter supports the client incoming, and also supports the parameter transfer between backend. The return data of backend supports filter, delete, move, rename, target and group. API can set the exception return when the orchestration call fails.
+- **Data transform ** :Support for converting returned data to JSON or XML.
+- **Load balancing**: Round-robin load balancing with weight.
+- **Service Discovery**: Service discorvery from Consul or Eureka.
+- **HTTP(S) Forward Proxy**: Hide real backend services, support Rest API, Webservice.
+- **Multi-tenant management**: According to different strategies to regnorize different users.
+- **Strategies**: Support different strategies to access different APIs, configure different authentication (anonymous, Apikey, Basic) and so on.
+- **API Alert**: Support the webhook and email to alert abnormal services.
+- **Flexible transmit rules**: support fuzzy matching request path, support rewriting transmit path, etc.
+- **IP Whitelist/Blacklist**
+- **Custom plugins**: Allow plugins to be mounted in common phases, such as before match, access, and proxy.
+- **CLI**: Start\stop\reload Goku through the command line.
+- **Serverless**: Invoke functions in each phase in Goku.
+- **Access Log**:Only record the basic content in proxy, customize the record fields and sort order, and automatically clean up the logs periodically.
+- **System Log**:Provide running logs of consoles and nodes,only record the error information, adjust the level to INFO, WARN or DEBUG according to the actual situation.
+- **Scalability**: plug-in mechanism is easy to extend.
+- **High performance**: Performance excels among many gateways.
+- **Open API**：Provide OPEN API for users to operate on the gateway for easy integration.
+- **Configured version management** : Support for the release of operations and multiple rollbacks.
+- **Monitoring and indicators**: Support for Prometheus, Graphite.
+
+# Benchmark
+![](https://data.eolinker.com/p7NFG6lb4c73b26cc880e838fe45aa31bc037b7415e3770.jpg)
+[Benchmark Detail](https://help.eolinker.com/#/tutorial/?groupID=c-362&productID=19#tip7 "Benchmark Detail")
+
+# Console Preview
+[Console Preview Detail](https://github.com/eolinker/goku-api-gateway/blob/master/docs/CONSOLE_PREVIEW.md "See Console Preview")
+
+# Quick Start
+* [Deployment Tutorial](https://help.eolinker.com/#/tutorial/?groupID=c-371&productID=19 "Deployment Tutorial")
+* [Docker for Console](https://hub.docker.com/r/eolinker/goku-api-gateway-ce-console "Docker for Console")、[Docker for Gateway Node](https://hub.docker.com/r/eolinker/goku-api-gateway-ce-node "Docker for Gateway Node")
+* [Quick Start](https://help.eolinker.com/#/tutorial/?groupID=c-307&productID=19 "Quick Start Tutorial")
+* [Source Code Compilation](https://help.eolinker.com/#/tutorial/?groupID=c-350&productID=19 "Source Code Compilation")
+
+# Enterprise Support
+Goku API Gateway EE (Enterprise Version) has more powerful functions, plug-in libraries and professional technical support services. If you want to know more details, you can contact us in the following ways.
+- Apply for free trial and demonstration of Enterprise Version：[Appointment trial](https://www.eolinker.com/#/survey/applyAmsCloud "Appointment trial")
+- Market Cooperation Mail：market@eolinker.com
+- Purchase consultation Mail：sales@eolinker.com
+- Help Center：[help.eolinker.com](help.eolinker.com "help.eolinker.com")
+- QQ Group: 725853895
+
+# About Us
+EOLINK is a leading API management service provider, providing professional API research and development management, API automated test service, API monitor service, API gateway and other services for more than 3000 enterprises worldwide. It is the first enterprise to formulate API R&D management industry norms for ITSS.
+
+Official website :[https://www.eolinker.com](https://www.eolinker.com "EOLINK Official Site")
+Free download of PC client :[https://www.eolinker.com/pc](https://www.eolinker.com/pc/ "Free download of PC client")
+
+# License
+```
+Copyright 2017-2019 Eolink Inc.
+
+Licensed under the GNU General Public License v3.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at http://www.gnu.org/licenses/gpl-3.0.html
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.
+```

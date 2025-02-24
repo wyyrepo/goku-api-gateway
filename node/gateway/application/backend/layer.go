@@ -41,8 +41,18 @@ func (b *Layer) Send(deadline context.Context, ctx *common.Context, variables *i
 	path := b.Path.Execution(variables)
 	body := b.Body.Execution(variables)
 	method := b.Method
+	if method == "FOLLOW" {
+		method = ctx.ProxyRequest.Method
+	}
+	header:= ctx.ProxyRequest.Headers()
+	if b.Encode == "json"{
+		header.Set("content-type","application/json; charset=utf-8")
+	} else if b.Encode == "xml" {
+		header.Set("content-type","application/xml; charset=utf-8")
+	}
 
-	r, finalTargetServer, retryTargetServers, err := b.Balance.Send(ctx, b.Protocol, method, path, ctx.ProxyRequest.Querys(), ctx.ProxyRequest.Headers(), []byte(body), b.TimeOut, b.Retry)
+	r, finalTargetServer, retryTargetServers, err := b.Balance.Send(ctx, b.Protocol, method, path, nil, header, []byte(body), b.TimeOut, b.Retry)
+
 
 	if err != nil {
 		return nil, err

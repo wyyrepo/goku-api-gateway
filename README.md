@@ -2,6 +2,10 @@
 
 [![Gitter](https://badges.gitter.im/goku-api-gateway/community.svg)](https://gitter.im/goku-api-gateway/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Go Report Card](https://goreportcard.com/badge/github.com/eolinker/goku-api-gateway)](https://goreportcard.com/report/github.com/eolinker/goku-api-gateway) [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3214/badge)](https://bestpractices.coreinfrastructure.org/projects/3214) ![](https://img.shields.io/badge/license-GPL3.0-blue.svg)
 
+----
+
+Goku_lite project has stopped maintenance. We have launched a new generation of Goku gateway. Welcome to pay attention [apinto](https://github.com/eolinker/apinto)
+----
 Goku API Gateway is a Golang-based microservice gateway that enables high-performance dynamic routing,service orchestration, multi-tenancy management, API access control, etc. It's also suitable for API management under micro-service system. 
 
 Goku provides graphic interface and plug-in system to make configuration easier and expand more convenient.
@@ -34,7 +38,7 @@ All in all, Goku API Gateway enables enterprise to focus on their business.
 - **Cluster Management**：Goku nodes are stateless and can be expanded horizontally. Also the configuration can be synchronized automatically.
 - **Hot Updates**: Continuously updates configurations without restart nodes.
 - **Orchestration**：Orchestration can correspond to multiple backends. The backend input parameter supports the client incoming, and also supports the parameter transfer between backend. The return data of backend supports filter, delete, move, rename, target and group. API can set the exception return when the orchestration call fails.
-- **Data transform ** :Support for converting returned data to JSON or XML.
+- **Data transform** :Support for converting returned data to JSON or XML.
 - **Load balancing**: Round-robin load balancing with weight.
 - **Service Discovery**: Service discorvery from Consul or Eureka.
 - **HTTP(S) Forward Proxy**: Hide real backend services, support Rest API, Webservice.
